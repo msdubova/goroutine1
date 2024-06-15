@@ -12,17 +12,13 @@ func main() {
 	chAverage := make(chan int)
 	chAverageResult := make(chan int)
 
-	fmt.Println("✅ Створили канали")
-
+	fmt.Println("Програма відкрита")
 	go random.CreateRandom(10, chRandInt)
-	numbers := <-chRandInt
-	fmt.Println("Отримали рандомні числа з каналу:", numbers)
 
-	go calculate.CalculateAverage(numbers, chAverage)
-	average := <-chAverage
-	fmt.Println("Отримали середнє число з рандомних чисел з каналу", average)
+	go calculate.CalculateAverage(chRandInt, chAverage)
 
-	go print.PrintAverage(chAverageResult, average)
-	result := <-chAverageResult
-	fmt.Println("Третя горутина виконана та результат", result)
+	go print.PrintAverage(chAverage, chAverageResult)
+	<-chAverageResult
+
+	fmt.Println("Програма завершена")
 }

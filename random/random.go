@@ -15,6 +15,6 @@ func CreateRandom(n int, ch chan<- []int) {
 
 	fmt.Println("Створено рандомні числа", numbers)
 	ch <- numbers
-	fmt.Println("Рандомні числа передано в канал")
-
+	fmt.Println("Рандомні числа передано в канал, закриваю канал")
+	close(ch)
 }

@@ -2,8 +2,12 @@ package print
 
 import "fmt"
 
-func PrintAverage(chAverageResult chan<- int, average int) {
+func PrintAverage(chAverage <-chan int, chAverageResult chan<- int) {
 	fmt.Println("✅ Виконується горутина 3 PrintAverage ")
-	chAverageResult <- average
-	fmt.Println("Третя горутина виводить число на екран ", average)
+	result := <-chAverage
+
+	fmt.Println("Третя горутина виводить число на екран ", result)
+	chAverageResult <- result
+	fmt.Println("Результат надруковано, закриваю канал")
+	close(chAverageResult)
 }
