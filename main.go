@@ -1,10 +1,10 @@
 package main
 
 import (
+	"Goroutine1/calculate"
+	"Goroutine1/print"
+	"Goroutine1/random"
 	"fmt"
-	calculateAverage "goroutine1/calculateAverage"
-	random "goroutine1/createRandom"
-	printaverage "goroutine1/printAverage"
 )
 
 func main() {
@@ -18,11 +18,11 @@ func main() {
 	numbers := <-chRandInt
 	fmt.Println("Отримали рандомні числа з каналу:", numbers)
 
-	go calculateAverage.CalculateAverage(numbers, chAverage)
+	go calculate.CalculateAverage(numbers, chAverage)
 	average := <-chAverage
 	fmt.Println("Отримали середнє число з рандомних чисел з каналу", average)
 
-	go printaverage.PrintAverage(chAverageResult, average)
+	go print.PrintAverage(chAverageResult, average)
 	result := <-chAverageResult
 	fmt.Println("Третя горутина виконана та результат", result)
 }

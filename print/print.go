@@ -1,4 +1,4 @@
-package printaverage
+package print
 
 import "fmt"
 

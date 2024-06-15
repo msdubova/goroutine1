@@ -1,4 +1,4 @@
-package calculateAverage
+package calculate
 
 import "fmt"
 
